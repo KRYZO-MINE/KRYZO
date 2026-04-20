@@ -1,13 +1,5 @@
-// === PRELOADER ===
+// === INITIALIZATION ===
 window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    setTimeout(() => {
-        preloader.classList.add('hide');
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 600);
-    }, 1000); 
-    
     document.getElementById('year').textContent = new Date().getFullYear();
     updateTime();
     setInterval(updateTime, 1000);
@@ -18,10 +10,10 @@ function updateTime() {
     const timeDisplay = document.getElementById('local-time');
     if(timeDisplay) {
         const now = new Date();
-        timeDisplay.textContent = now.toLocaleTimeString('id-ID', {
+        timeDisplay.textContent = now.toLocaleTimeString('en-IN', {
             hour: '2-digit', 
             minute: '2-digit',
-            hour12: false
+            hour12: true
         });
     }
 }
@@ -124,41 +116,7 @@ filterBtns.forEach(btn => {
     });
 });
 
-// === 3D TILT EFFECT ===
-if (window.matchMedia("(min-width: 768px)").matches) {
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -3; 
-            const rotateY = ((x - centerX) / centerX) * 3;
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-        });
-    });
-}
-
-// === PARALLAX EFFECT ===
-window.addEventListener('scroll', () => {
-    const parallaxImages = document.querySelectorAll('.parallax-img');
-    parallaxImages.forEach(img => {
-        const rect = img.parentElement.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        if (isVisible) {
-            const speed = 0.08;
-            const yPos = (window.innerHeight - rect.top) * speed;
-            img.style.transform = `translateY(${yPos - 20}px) scale(1.1)`;
-        }
-    });
-});
-
-// === PROJECT MODAL LOGIC ===
+// === PROJECT FILTER LOGIC ===
 const modal = document.getElementById('project-modal');
 const modalBackdrop = document.getElementById('modal-backdrop');
 const modalContent = document.getElementById('modal-content');
@@ -169,12 +127,16 @@ const mTitle = document.getElementById('modal-title');
 const mCategory = document.getElementById('modal-category');
 const mImage = document.getElementById('modal-image');
 const mDesc = document.getElementById('modal-desc');
+const mLink = document.getElementById('modal-link');
 
 function openModal(data) {
     mTitle.textContent = data.title;
     mCategory.textContent = data.category;
     mImage.src = data.image;
     mDesc.textContent = data.desc;
+    if (mLink && data.link) {
+        mLink.href = data.link;
+    }
 
     modal.classList.remove('hidden');
     setTimeout(() => {
@@ -202,7 +164,8 @@ triggers.forEach(trigger => {
             title: trigger.dataset.title,
             category: trigger.dataset.category,
             image: trigger.dataset.image,
-            desc: trigger.dataset.desc
+            desc: trigger.dataset.desc,
+            link: trigger.dataset.link
         };
         openModal(data);
     });
@@ -243,11 +206,11 @@ contactForm.addEventListener('submit', (e) => {
     const btn = e.target.querySelector('button');
     const originalText = btn.innerHTML;
     
-    btn.innerHTML = '<i class="fas fa-circle-notch animate-spin"></i> Mengirim...';
+    btn.innerHTML = '<i class="fas fa-circle-notch animate-spin"></i> Sending...';
     btn.disabled = true;
 
     setTimeout(() => {
-        showToast('Pesan berhasil dikirim! Kami akan segera menghubungi Anda.');
+        showToast('Message sent successfully! I will get back to you soon.');
         e.target.reset();
         btn.innerHTML = originalText;
         btn.disabled = false;
@@ -255,55 +218,5 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 // === SCROLL REVEAL ANIMATION [MODERN] ===
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-};
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target); 
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
-    observer.observe(el);
-});
-
-// === MAGNETIC BUTTON EFFECT ===
-const magneticBtns = document.querySelectorAll('.magnetic-btn');
-
-if (window.matchMedia("(min-width: 768px)").matches) {
-    magneticBtns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-        });
-
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate(0px, 0px)';
-        });
-    });
-}
-
-// === SPOTLIGHT EFFECT LOGIC [NEW] ===
-const spotlightCards = document.querySelectorAll('.spotlight-card');
-
-spotlightCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-
-        
-    });
-});
+// === SCROLL REVEAL ANIMATION [MODERN] ===
