@@ -1,82 +1,78 @@
-<div align="center">
+# Sahil Jangra · KRYZO
 
-  # 🌟 Sahil Jangra - Developer Portfolio 🌟
+KRYZO is the portfolio of Sahil Jangra, a frontend web developer based in Hisar, Haryana, India. The site presents selected projects, skills, experience, education, contact options and practical frontend development content.
 
-  <p align="center">
-    <strong>A modern, interactive, and responsive portfolio showcasing my journey as a Frontend Developer.</strong>
-  </p>
+The production site is [kryzo.space](https://www.kryzo.space/).
 
-  <p align="center">
-    <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge&logo=status" alt="Status" />
-    <img src="https://img.shields.io/badge/Made_with-HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML" />
-    <img src="https://img.shields.io/badge/Styled_with-TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-    <img src="https://img.shields.io/badge/Powered_by-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-  </p>
+## Features
 
-</div>
+- Responsive portfolio homepage with dark and light themes.
+- Interactive project gallery with filtering and project details.
+- Semantic SEO metadata and canonical URLs.
+- `ProfilePage`, `Person` and `WebSite` JSON-LD structured data.
+- Dedicated crawlable pages for the biography, projects, resume, services and articles.
+- XML sitemap and `robots.txt` for search-engine discovery.
+- Contact form, email contact and WhatsApp enquiry link.
 
----
-
-## 🎨 Overview
-
-Welcome to my personal portfolio repository! This project is a digital representation of my skills, experiences, and the creative work I do. It features a sleek design, smooth animations, and a responsive layout that looks great on any device. 
-
-## ✨ Key Features
-
-- 🌓 **Dark/Light Mode:** Seamlessly switch between themes for optimal viewing.
-- 📱 **Fully Responsive:** Flawless experience across mobile, tablet, and desktop screens.
-- 🚀 **Interactive UI:** Engaging scroll animations and dynamic components.
-- 📂 **Project Showcase:** Detailed modal views for each selected project.
-- 💬 **Direct Contact:** Integrated form and quick WhatsApp connectivity.
-
-## 🛠️ Technologies Used
-
-This portfolio is built using modern web technologies:
-
-| Technology | Description |
-| :--- | :--- |
-| **HTML5** | Semantic and accessible structure. |
-| **Tailwind CSS** | Utility-first CSS framework for rapid UI development and styling. |
-| **JavaScript (Vanilla)** | Core logic for interactivity, animations, and DOM manipulation. |
-| **Font Awesome** | High-quality icons used throughout the design. |
-
-## 🚀 Getting Started
-
-Want to run this project locally? It's simple!
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/portfolio.git
-   ```
-
-2. **Navigate to the directory:**
-   ```bash
-   cd portfolio
-   ```
-
-3. **Open `index.html`:**
-   Simply double-click the `index.html` file or open it with your favorite live server extension in VS Code.
-
-## 📁 Project Structure
+## Site structure
 
 ```text
-📦 Portfolio
- ┣ 📂 images/          # Contains all project and profile images
- ┣ 📜 index.html       # The main HTML structure
- ┣ 📜 styles.css       # Custom styles complementing Tailwind
- ┣ 📜 script.js        # Interactivity and animation logic
- ┗ 📜 README.md        # You are here!
+/
+├── index.html                         Homepage and entity hub
+├── about/sahil-jangra/                 Biography and Person profile
+├── projects/                           Project index
+│   └── gg-mouse-pro/                   Project case study
+├── resume/                             Resume landing page
+├── services/web-development-hisar/    Local web-development services
+├── articles/                           Frontend article index
+├── images/                             Profile and project images
+├── SahilJangraResume.pdf               Downloadable resume
+├── styles.css                          Homepage custom styles
+├── content-pages.css                   Supporting-page styles
+├── script.js                           Homepage interactions
+├── robots.txt                          Crawler access rules
+└── sitemap.xml                         Canonical URL sitemap
 ```
 
-## 📞 Let's Connect
+## Technology
 
-I'm always open to discussing web development work or partnership opportunities.
+- HTML5 and semantic document structure
+- Tailwind CSS utilities with custom CSS
+- Vanilla JavaScript
+- Font Awesome icons
+- Google Fonts
+- Schema.org JSON-LD structured data
 
-- 📧 Email: [sahiljangra5556@gmail.com](mailto:sahiljangra5556@gmail.com)
-- 📍 Location: Hisar, Haryana, India
-- 📞 Phone: +91 99969 47080
+## Run locally
 
-<div align="center">
-  <br>
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=100&section=footer&text=Thanks%20for%20Visiting!&fontSize=20" width="100%" />
-</div>
+This is a static site and does not require a build step.
+
+1. Clone the repository.
+
+   ```bash
+   git clone https://github.com/KRYZO-MINE/KRYZO.git
+   cd KRYZO
+   ```
+
+2. Serve the directory with a local static server. For example:
+
+   ```bash
+   npx serve .
+   ```
+
+3. Open the local URL shown by the server. A local server is recommended because the supporting pages use root-relative paths such as `/projects/` and `/content-pages.css`.
+
+## SEO deployment notes
+
+- Keep `https://www.kryzo.space/` as the canonical production domain.
+- Submit `https://www.kryzo.space/sitemap.xml` in Google Search Console.
+- Configure permanent redirects from any controlled duplicate Vercel portfolio domains to the matching KRYZO URLs.
+- Keep external identity links limited to profiles that belong to Sahil Jangra and are verified before adding them to `sameAs`.
+
+## Contact
+
+- Email: [sahiljangra5556@gmail.com](mailto:sahiljangra5556@gmail.com)
+- Location: Hisar, Haryana, India
+- GitHub: [github.com/KRYZO-MINE](https://github.com/KRYZO-MINE)
+- Instagram: [instagram.com/brokedplayer](https://instagram.com/brokedplayer)
+- YouTube: [youtube.com/@ggteamindia](https://youtube.com/@ggteamindia)
