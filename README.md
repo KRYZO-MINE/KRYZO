@@ -25,6 +25,7 @@ The production site is [kryzo.space](https://www.kryzo.space/).
 ├── resume/                             Resume landing page
 ├── services/web-development-hisar/    Local web-development services
 ├── articles/                           Full stack article index
+├── blogs/                              Full stack blog index and guides
 ├── images/                             Profile and project images
 ├── SahilJangraResume.pdf               Downloadable resume
 ├── styles.css                          Homepage custom styles

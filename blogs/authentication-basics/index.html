@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Authentication Basics for Web Apps | KRYZO</title><meta name="description" content="A beginner-friendly guide to passwords, sessions, tokens and safer authentication flows."><link rel="canonical" href="https://www.kryzo.space/blogs/authentication-basics/"><link rel="stylesheet" href="/content-pages.css"></head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <h1>Authentication Basics for Web Apps</h1><p class="lede">Authentication answers “who is this user?” before an application allows private actions.</p>
+  <h2>Protect passwords</h2><p>Never store a plain password. Hash it with a slow, modern password hashing algorithm on the server and compare hashes during login. Keep authentication logic away from client-only code.</p>
+  <h2>Sessions and tokens</h2><p>A session stores a server-side login record and gives the browser a secure cookie. Token-based systems send a signed token with requests. In both cases, use HTTPS, short-lived credentials where practical and safe cookie settings.</p>
+  <h2>Authorize every sensitive action</h2><p>Authentication identifies a user; authorization checks what that user may do. Validate ownership and permissions on the backend for every protected operation, even when the interface hides the button.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

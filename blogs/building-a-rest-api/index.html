@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Building Your First REST API | KRYZO</title><meta name="description" content="Learn the basics of REST APIs, routes, HTTP methods, JSON responses and input validation."><link rel="canonical" href="https://www.kryzo.space/blogs/building-a-rest-api/"><link rel="stylesheet" href="/content-pages.css"></head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <h1>Building Your First REST API</h1><p class="lede">A practical introduction to routes, HTTP methods and JSON responses.</p>
+  <p>An API is a contract that lets software communicate. A REST API organizes resources behind URLs and uses standard HTTP methods. For example, a notes API might expose <code>/api/notes</code> for a collection of notes.</p>
+  <div class="card-grid"><article class="card"><h3>GET</h3><p>Read a list or one resource. A successful response commonly uses status 200.</p></article><article class="card"><h3>POST</h3><p>Create a resource after validating the request body. Return the created record and status 201.</p></article><article class="card"><h3>PATCH and DELETE</h3><p>Update part of a resource with PATCH and remove it with DELETE. Return clear status codes and errors.</p></article></div>
+  <h2>Keep the contract predictable</h2><p>Use consistent JSON shapes, validate every input and never trust values from the browser. Document required fields, authentication rules and error responses so the frontend can handle the API confidently.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>
