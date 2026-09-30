@@ -1,13 +1,32 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deploying a Full Stack App | KRYZO</title><meta name="description" content="A practical deployment checklist for taking a full stack application from local development to production."><link rel="canonical" href="https://www.kryzo.space/blogs/deploying-full-stack-app/"><link rel="stylesheet" href="/content-pages.css"></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Deploying a Full Stack App | KRYZO</title>
+  <meta name="description" content="A practical deployment checklist for taking a full stack application from local development to production.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Deploying a Full Stack App | KRYZO">
+  <meta property="og:description" content="Learn about builds, hosting, environment variables, migrations, monitoring and safe full stack releases.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/deploying-full-stack-app/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/deploying-full-stack-app/deploying-full-stack-app.jpg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/deploying-full-stack-app/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
 <body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta">Delivery guide · 8 min read</p>
   <h1>Deploying a Full Stack App</h1><p class="lede">A calm checklist for moving from a local project to a reliable live application.</p>
-  <img class="article-cover" src="/images/Cleveroad.jpg" alt="Web product interface ready for production deployment">
-  <p>Deployment is the step where the browser, backend and database become a service other people can use. Treat it as a repeatable process rather than a one-time upload.</p>
-  <h2>Separate configuration from code</h2><p>Keep database URLs, API keys and session secrets in environment variables. Add a safe example file for teammates, but never commit production secrets to the repository.</p>
+  <img class="article-cover" src="/blogs/deploying-full-stack-app/deploying-full-stack-app.jpg" alt="Web product interface ready for production deployment">
+  <p><strong>Deployment</strong> is the process of building, hosting and configuring software so real people can use it. It is more than uploading files: a full stack release also connects the frontend, backend, database, domain, HTTPS certificate and monitoring.</p>
+  <p>Keep deployment repeatable. A script or continuous integration workflow should build the same commit the team reviewed, run checks and record which version is live.</p>
+  <h2>Important deployment definitions</h2><div class="card-grid"><article class="card"><h3>Build</h3><p>A repeatable step that turns source code into optimized browser assets or a runnable server package.</p></article><article class="card"><h3>Hosting</h3><p>The service that runs the frontend, backend or database and provides network access to it.</p></article><article class="card"><h3>Environment variable</h3><p>Configuration supplied at runtime, such as an API URL or database connection string, rather than committed in code.</p></article><article class="card"><h3>CI/CD</h3><p>Automation that tests, builds and releases changes consistently after a commit.</p></article></div>
+  <h2>Separate configuration from code</h2><p>Keep database URLs, API keys and session secrets in environment variables. Add a safe example file for teammates, but never commit production secrets to the repository. Use separate values for local, staging and production systems.</p>
   <h2>Build and release</h2><p>Run the same build and validation steps in a clean environment that your deployment service uses. Deploy the frontend and backend with the correct start commands, domains and database migrations.</p>
-  <h2>Observe the result</h2><p>Check the health of the API, inspect logs and test the main user journey after every release. Add backups, HTTPS and a rollback path before real users depend on the service.</p>
+  <p>Check allowed origins and HTTPS before the frontend calls the API. If a schema migration is needed, make it backward compatible when possible so old and new server instances can run during a rolling release.</p>
+  <h2>Observe and recover</h2><p>Check the health of the API, inspect logs and test the main user journey after every release. Add backups, HTTPS and a rollback path before real users depend on the service.</p>
+  <ul><li>Open the production site on a phone and desktop.</li><li>Sign in, create a record and confirm it persists after refresh.</li><li>Check browser errors, server logs and database metrics.</li><li>Keep the previous build available until the new release is healthy.</li></ul>
   <p>Start with a small staging release, verify CORS and environment variables, then monitor real errors after launch. A clear release checklist lets you improve the product without guessing which layer failed.</p>
   <p><a class="button" href="/blogs/">Back to all blogs</a></p>
 </main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>

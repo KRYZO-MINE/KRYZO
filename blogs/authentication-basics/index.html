@@ -1,14 +1,32 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Authentication Basics for Web Apps | KRYZO</title><meta name="description" content="A beginner-friendly guide to passwords, sessions, tokens and safer authentication flows."><link rel="canonical" href="https://www.kryzo.space/blogs/authentication-basics/"><link rel="stylesheet" href="/content-pages.css"></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Authentication Basics for Web Apps | KRYZO</title>
+  <meta name="description" content="A beginner-friendly guide to authentication, authorization, password hashing, sessions, tokens and safer login flows.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Authentication Basics for Web Apps | KRYZO">
+  <meta property="og:description" content="Understand the security concepts behind passwords, sessions, tokens and protected web actions.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/authentication-basics/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/authentication-basics/authentication-basics.jpg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/authentication-basics/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
 <body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta">Security guide · 8 min read</p>
   <h1>Authentication Basics for Web Apps</h1><p class="lede">Authentication answers “who is this user?” before an application allows private actions.</p>
-  <img class="article-cover" src="/images/Game Dashboard Design.jpg" alt="Application dashboard with protected user features">
+  <img class="article-cover" src="/blogs/authentication-basics/authentication-basics.jpg" alt="Application dashboard with protected user features">
+  <p><strong>Authentication</strong> verifies an identity. <strong>Authorization</strong> decides what that identity is allowed to do. They work together: a user may prove that they own an account, but the backend must still check whether that account can edit a particular project.</p>
   <p>Authentication is a conversation between the browser and backend: the user proves an identity, the server creates a trusted login state and each protected request is checked before it changes data.</p>
   <h2>Protect passwords</h2><p>Never store a plain password. Hash it with a slow, modern password hashing algorithm on the server and compare hashes during login. Keep authentication logic away from client-only code.</p>
-  <h2>Sessions and tokens</h2><p>A session stores a server-side login record and gives the browser a secure cookie. Token-based systems send a signed token with requests. In both cases, use HTTPS, short-lived credentials where practical and safe cookie settings.</p>
+  <p>Use HTTPS so credentials cannot be read in transit, validate email and password input, and return a general login error instead of revealing whether an account exists. Store reset tokens as short-lived, single-use values.</p>
+  <h2>Sessions and tokens</h2><p>A session stores a server-side login record and gives the browser a secure cookie. Token-based systems send a signed token with requests. In both cases, use HTTPS, short-lived credentials where practical and safe cookie settings such as <code>HttpOnly</code>, <code>Secure</code> and an appropriate <code>SameSite</code> value.</p>
+  <div class="card-grid"><article class="card"><h3>Session</h3><p>The server keeps the login state and the browser keeps an opaque session identifier.</p></article><article class="card"><h3>Token</h3><p>A signed credential carries claims that the server verifies before accepting a request.</p></article><article class="card"><h3>Authorization</h3><p>A permission check confirms that this authenticated user may access this exact resource.</p></article></div>
   <h2>Authorize every sensitive action</h2><p>Authentication identifies a user; authorization checks what that user may do. Validate ownership and permissions on the backend for every protected operation, even when the interface hides the button.</p>
-  <p>Also protect login and password reset routes against abuse, expire sessions when appropriate and explain failures without revealing whether a specific account exists. Small details reduce risk without making the user experience confusing.</p>
+  <h2>Reduce abuse</h2><p>Protect login and password reset routes with rate limits, expire sessions when appropriate and provide a clear logout action. Log suspicious failures without recording passwords or full tokens. Small details reduce risk without making the user experience confusing.</p>
   <p><a class="button" href="/blogs/">Back to all blogs</a></p>
 </main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
 </html>

@@ -1,14 +1,38 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Frontend vs Backend: What Is the Difference? | KRYZO</title><meta name="description" content="Learn the difference between frontend and backend development and how the two layers communicate."><link rel="canonical" href="https://www.kryzo.space/blogs/frontend-vs-backend/"><link rel="stylesheet" href="/content-pages.css"></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Frontend vs Backend: What Is the Difference? | KRYZO</title>
+  <meta name="description" content="Learn the difference between frontend and backend development, client-server architecture and API communication.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Frontend vs Backend: What Is the Difference? | KRYZO">
+  <meta property="og:description" content="See how browser interfaces, servers and APIs collaborate in a full stack application.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/frontend-vs-backend/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/frontend-vs-backend/frontend-vs-backend.jpg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/frontend-vs-backend/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
 <body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
-  <h1>Frontend vs Backend: What Is the Difference?</h1><p class="lede">The browser and the server have different jobs, but they work as one experience.</p>
-  <img class="article-cover" src="/images/Capture d'écran 2025-10-22 182207.png" alt="Portfolio interface showing the frontend layer">
-  <h2>Frontend development</h2><p>Frontend code runs in the browser. It displays content, handles clicks and forms, manages loading states and communicates with APIs. HTML, CSS and JavaScript are the foundation; React can organize a larger interface into reusable components.</p>
-  <p>A good frontend also handles the moments between actions: loading, empty results, validation errors and slow connections. Accessibility, responsive layout and clear feedback are part of the engineering work.</p>
+  <p class="article-meta">Architecture guide · 7 min read</p>
+  <h1>Frontend vs Backend: What Is the Difference?</h1><p class="lede">The browser and the server have different jobs, but they work as one product experience.</p>
+  <img class="article-cover" src="/blogs/frontend-vs-backend/frontend-vs-backend.jpg" alt="Portfolio interface showing the frontend layer">
+  <p>The <strong>frontend</strong> is the client side of an application: the code downloaded to a browser or mobile device. The <strong>backend</strong> is the server side: code that protects rules, talks to data stores and responds to requests. Together they form the client-server model used by most modern web apps.</p>
+  <h2>Frontend development</h2><p>Frontend code displays content, handles clicks and forms, manages loading states and communicates with APIs. HTML, CSS and JavaScript are the foundation; React can organize a larger interface into reusable components.</p>
+  <p>A good frontend also handles the moments between actions: loading, empty results, validation errors and slow connections. Accessibility, responsive layout, keyboard support and clear feedback are part of the engineering work.</p>
   <h2>Backend development</h2><p>Backend code runs on a server. It authenticates users, validates requests, applies business rules and talks to databases or external services. A backend should return predictable responses and useful error messages.</p>
+  <p>The backend is also the security boundary. Browser code can be inspected by anyone, so authorization checks, private keys and database credentials belong on the server. A frontend may hide an edit button, but the backend must still verify permission when a request arrives.</p>
+  <h2>Client, server and API definitions</h2>
+  <div class="card-grid"><article class="card"><h3>Client</h3><p>The browser or app that sends a request and renders the response for a person.</p></article><article class="card"><h3>Server</h3><p>A process that receives requests, runs trusted business logic and returns data or a result.</p></article><article class="card"><h3>API contract</h3><p>A documented agreement describing URLs, input fields, authentication, response shapes and errors.</p></article></div>
   <h2>How they connect</h2><p>A frontend sends an HTTP request to an API endpoint. The backend checks the request, reads or changes data and returns JSON. The frontend then updates the page. Clear contracts between these layers make a project easier to test and maintain.</p>
-  <h2>Where full stack work begins</h2><p>Full stack work connects the two responsibilities. A developer can trace a form from its input fields through validation and database storage to the response shown on screen. That shared understanding makes collaboration easier, even when a team specializes by layer.</p>
+  <pre><code>POST /api/tasks
+Content-Type: application/json
+
+{"title":"Read API guide"}</code></pre>
+  <p>The same request can result in a <code>201 Created</code> response when it succeeds or a helpful <code>400 Bad Request</code> response when validation fails. The interface should explain either result without exposing internal details.</p>
+  <h2>Where full stack work begins</h2><p>Full stack work connects both responsibilities. A developer can trace a form from its input fields through validation and database storage to the response shown on screen. That shared understanding makes collaboration easier, even when a team specializes by layer.</p>
   <p><a class="button" href="/blogs/">Back to all blogs</a></p>
 </main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
 </html>
