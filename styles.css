@@ -260,145 +260,85 @@
     animation-delay: 0.4s;
 }
 
-/* Subtle orbital spheres around the profile image */
-.hero-orbital-system {
-    overflow: visible;
-    --orbital-width: 84%;
-    --orbital-height: 74%;
-}
-
-.hero-orb {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: var(--orbital-width);
-    height: var(--orbital-height);
-    transform-origin: center;
-    transform: translate(-50%, -50%) scale(var(--orbital-scale, 1)) rotate(var(--orb-start, 0deg));
-    will-change: transform;
-}
-
-.hero-orb-sphere {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    display: block;
-    width: var(--orb-size, 2rem);
-    height: var(--orb-size, 2rem);
-    border-radius: 999px;
+/* Low-motion technology icons around the profile image */
+.hero-tech-field {
     overflow: hidden;
-    transform: translate(-50%, -50%);
-    background:
-        radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.96) 0 7%, rgba(191, 219, 254, 0.52) 18%, transparent 38%),
-        radial-gradient(circle at 72% 76%, rgba(30, 27, 105, 0.58) 0 10%, transparent 62%),
-        linear-gradient(145deg, #93c5fd 0%, #4f7df7 38%, #7650df 72%, #312e81 100%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.24), inset 7px 6px 10px rgba(255, 255, 255, 0.2), inset -10px -12px 18px rgba(26, 29, 102, 0.42);
-    opacity: 0.76;
-    animation: hero-orb-bob var(--bob-speed, 4.8s) ease-in-out infinite;
+}
+
+.hero-tech-icon {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 0.85rem;
+    color: #2563eb;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 8px 22px rgba(37, 99, 235, 0.1);
+    font-size: 1.35rem;
+    opacity: 0.86;
+    animation: hero-tech-drift var(--tech-speed, 7s) ease-in-out infinite alternate;
+    animation-delay: var(--tech-delay, 0s);
     will-change: transform;
 }
 
-.hero-orb-sphere::before,
-.hero-orb-sphere::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    border-radius: 999px;
+.dark .hero-tech-icon {
+    color: #93c5fd;
+    border-color: rgba(148, 163, 184, 0.24);
+    background: rgba(15, 23, 42, 0.58);
+    box-shadow: 0 8px 22px rgba(37, 99, 235, 0.18);
 }
 
-.hero-orb-sphere::before {
-    top: 8%;
-    left: 12%;
-    width: 42%;
-    height: 25%;
-    background: rgba(255, 255, 255, 0.54);
-    filter: blur(2px);
-    transform: rotate(-24deg);
+.hero-tech-icon b {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: -0.04em;
 }
 
-.hero-orb-sphere::after {
-    right: 8%;
-    bottom: 7%;
-    width: 54%;
-    height: 32%;
-    background: rgba(29, 30, 110, 0.3);
-    filter: blur(5px);
-    transform: rotate(-24deg);
+.hero-tech-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
-.dark .hero-orb-sphere {
-    opacity: 0.9;
-    box-shadow: 0 0 28px rgba(59, 130, 246, 0.38), inset 7px 6px 10px rgba(255, 255, 255, 0.22), inset -10px -12px 18px rgba(26, 29, 102, 0.52);
-}
+.hero-tech-neon { top: 14%; left: 13%; color: #0ea5e9; --tech-speed: 7.4s; --tech-delay: -1s; }
+.hero-tech-github { top: 25%; right: 8%; --tech-speed: 8.1s; --tech-delay: -3s; }
+.hero-tech-vercel { top: 7%; right: 27%; color: #334155; --tech-speed: 7.8s; --tech-delay: -2s; }
+.hero-tech-react { bottom: 14%; left: 10%; color: #06b6d4; --tech-speed: 8.7s; --tech-delay: -4s; }
+.hero-tech-node { bottom: 18%; right: 8%; color: #16a34a; --tech-speed: 7.6s; --tech-delay: -2.5s; }
+.hero-tech-typescript { top: 48%; left: 4%; color: #2563eb; --tech-speed: 8.4s; --tech-delay: -5s; }
+.hero-tech-golang { top: 55%; right: 3%; color: #0891b2; --tech-speed: 9s; --tech-delay: -1.5s; }
+.hero-tech-python { bottom: 5%; right: 30%; color: #eab308; --tech-speed: 8.2s; --tech-delay: -3.5s; }
 
-.hero-orb-cw {
-    animation: hero-orbit-cw var(--orbit-speed, 22s) linear infinite;
-}
-
-.hero-orb-ccw {
-    animation: hero-orbit-ccw var(--orbit-speed, 24s) linear infinite;
-}
-
-.hero-orb-1 { --orb-start: 18deg; --orb-size: 3.3rem; --orbit-speed: 24s; --bob-speed: 5.3s; }
-.hero-orb-2 { --orb-start: 108deg; --orb-size: 1.75rem; --orbit-speed: 29s; --bob-speed: 4.4s; }
-.hero-orb-3 { --orb-start: 198deg; --orb-size: 2.7rem; --orbit-speed: 26s; --bob-speed: 5.8s; }
-.hero-orb-4 { --orb-start: 288deg; --orb-size: 1.55rem; --orbit-speed: 32s; --bob-speed: 4.9s; }
-.hero-orb-5 { --orb-start: 18deg; --orb-size: 2.1rem; --orbital-scale: 1.08; --orbit-speed: 27s; --bob-speed: 6.1s; }
-.hero-orb-6 { --orb-start: 108deg; --orb-size: 1.25rem; --orbital-scale: 1.07; --orbit-speed: 34s; --bob-speed: 5.1s; }
-.hero-orb-7 { --orb-start: 198deg; --orb-size: 1.85rem; --orbital-scale: 1.08; --orbit-speed: 30s; --bob-speed: 6.5s; }
-.hero-orb-8 { --orb-start: 288deg; --orb-size: 1.1rem; --orbital-scale: 1.07; --orbit-speed: 36s; --bob-speed: 5.6s; }
-
-@keyframes hero-orbit-cw {
-    from { transform: translate(-50%, -50%) scale(var(--orbital-scale, 1)) rotate(var(--orb-start, 0deg)); }
-    to { transform: translate(-50%, -50%) scale(var(--orbital-scale, 1)) rotate(calc(var(--orb-start, 0deg) + 360deg)); }
-}
-
-@keyframes hero-orbit-ccw {
-    from { transform: translate(-50%, -50%) scale(var(--orbital-scale, 1)) rotate(var(--orb-start, 0deg)); }
-    to { transform: translate(-50%, -50%) scale(var(--orbital-scale, 1)) rotate(calc(var(--orb-start, 0deg) - 360deg)); }
-}
-
-@keyframes hero-orb-bob {
-    0%, 100% { transform: translate(-50%, -50%) translateY(-3px) scale(1); }
-    50% { transform: translate(-50%, -50%) translateY(4px) scale(1.04); }
+@keyframes hero-tech-drift {
+    from { transform: translate3d(0, -4px, 0); }
+    to { transform: translate3d(0, 4px, 0); }
 }
 
 @media (max-width: 767px) {
-    .hero-orbital-system {
-        --orbital-width: 92%;
-        --orbital-height: 76%;
+    .hero-tech-icon {
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 0.7rem;
+        font-size: 1rem;
     }
 
-    .hero-orb-1 { --orb-size: 2.35rem; }
-    .hero-orb-2 { --orb-size: 1.35rem; }
-    .hero-orb-3 { --orb-size: 2rem; }
-    .hero-orb-4 { --orb-size: 1.2rem; }
-    .hero-orb-5 { --orb-size: 1.5rem; }
-    .hero-orb-6 { --orb-size: 1rem; }
-    .hero-orb-7 { --orb-size: 1.35rem; }
-    .hero-orb-8 { --orb-size: 0.85rem; }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-    .hero-orbital-system {
-        --orbital-width: 78%;
-        --orbital-height: 68%;
-    }
-
-    .hero-orb-1 { --orb-size: 2.7rem; }
-    .hero-orb-2 { --orb-size: 1.55rem; }
-    .hero-orb-3 { --orb-size: 2.25rem; }
-    .hero-orb-4 { --orb-size: 1.35rem; }
-    .hero-orb-5 { --orb-size: 1.75rem; }
-    .hero-orb-6 { --orb-size: 1.1rem; }
-    .hero-orb-7 { --orb-size: 1.5rem; }
-    .hero-orb-8 { --orb-size: 0.95rem; }
+    .hero-tech-icon svg { width: 1rem; height: 1rem; }
+    .hero-tech-icon b { font-size: 0.65rem; }
+    .hero-tech-neon { top: 12%; left: 4%; }
+    .hero-tech-github { top: 21%; right: 3%; }
+    .hero-tech-vercel { top: 4%; right: 23%; }
+    .hero-tech-react { bottom: 14%; left: 3%; }
+    .hero-tech-node { bottom: 17%; right: 3%; }
+    .hero-tech-typescript { top: 48%; left: 0; }
+    .hero-tech-golang { top: 55%; right: 0; }
+    .hero-tech-python { bottom: 4%; right: 24%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-orb,
-    .hero-orb-sphere {
+    .hero-tech-icon {
         animation: none;
     }
 }
