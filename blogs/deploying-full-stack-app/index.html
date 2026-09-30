@@ -3,9 +3,12 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deploying a Full Stack App | KRYZO</title><meta name="description" content="A practical deployment checklist for taking a full stack application from local development to production."><link rel="canonical" href="https://www.kryzo.space/blogs/deploying-full-stack-app/"><link rel="stylesheet" href="/content-pages.css"></head>
 <body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
   <h1>Deploying a Full Stack App</h1><p class="lede">A calm checklist for moving from a local project to a reliable live application.</p>
+  <img class="article-cover" src="/images/Cleveroad.jpg" alt="Web product interface ready for production deployment">
+  <p>Deployment is the step where the browser, backend and database become a service other people can use. Treat it as a repeatable process rather than a one-time upload.</p>
   <h2>Separate configuration from code</h2><p>Keep database URLs, API keys and session secrets in environment variables. Add a safe example file for teammates, but never commit production secrets to the repository.</p>
   <h2>Build and release</h2><p>Run the same build and validation steps in a clean environment that your deployment service uses. Deploy the frontend and backend with the correct start commands, domains and database migrations.</p>
   <h2>Observe the result</h2><p>Check the health of the API, inspect logs and test the main user journey after every release. Add backups, HTTPS and a rollback path before real users depend on the service.</p>
+  <p>Start with a small staging release, verify CORS and environment variables, then monitor real errors after launch. A clear release checklist lets you improve the product without guessing which layer failed.</p>
   <p><a class="button" href="/blogs/">Back to all blogs</a></p>
 </main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
 </html>
