@@ -1,6 +1,6 @@
 # Sahil Jangra · KRYZO
 
-KRYZO is the portfolio of Sahil Jangra, a frontend web developer based in Hisar, Haryana, India. The site presents selected projects, skills, experience, education, contact options and practical frontend development content.
+KRYZO is the portfolio of Sahil Jangra, a full stack developer based in Hisar, Haryana, India. The site presents selected projects, skills, experience, education, contact options and practical full stack development content.
 
 The production site is [kryzo.space](https://www.kryzo.space/).
 
@@ -24,7 +24,7 @@ The production site is [kryzo.space](https://www.kryzo.space/).
 │   └── gg-mouse-pro/                   Project case study
 ├── resume/                             Resume landing page
 ├── services/web-development-hisar/    Local web-development services
-├── articles/                           Frontend article index
+├── articles/                           Full stack article index
 ├── images/                             Profile and project images
 ├── SahilJangraResume.pdf               Downloadable resume
 ├── styles.css                          Homepage custom styles
