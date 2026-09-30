@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>What Is Full Stack Development? | KRYZO</title>
+  <meta name="description" content="A complete beginner-friendly explanation of frontend, backend, APIs, databases and deployment in full stack development.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="What Is Full Stack Development? | KRYZO">
+  <meta property="og:description" content="Learn how the frontend, backend, database and deployment layers work together in a modern web app.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/what-is-full-stack-development/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/what-is-full-stack-development/what-is-full-stack-development.jpg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/what-is-full-stack-development/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta">Full stack guide · 8 min read</p>
+  <h1>What Is Full Stack Development?</h1>
+  <p class="lede">A practical map of the layers that make a modern web application work.</p>
+  <img class="article-cover" src="/blogs/what-is-full-stack-development/what-is-full-stack-development.jpg" alt="Full stack dashboard with frontend and data views">
+  <p><strong>Full stack development</strong> means building across the main parts of a web product. The frontend is what people see and use in the browser. The backend runs on a server, applies business rules and exposes data through APIs. A database stores information, while deployment makes the application available online.</p>
+  <p>Think of a booking app. The browser shows available dates, the API checks availability, the database stores reservations and the deployment platform keeps each service reachable. A full stack developer understands this complete request path and can make each layer work together.</p>
+  <h2>The four layers, defined</h2>
+  <div class="card-grid"><article class="card"><h3>Frontend</h3><p>Frontend code runs in the browser. HTML creates structure, CSS controls presentation and JavaScript adds interaction. React and similar tools help teams build reusable interface components.</p></article><article class="card"><h3>Backend</h3><p>Backend code runs on a server. Node.js, Python and Go can receive requests, validate input, apply business rules, call services and return useful responses.</p></article><article class="card"><h3>Database</h3><p>A database is the durable memory of an application. SQL systems organize related records in tables, while document systems store flexible JSON-like records.</p></article><article class="card"><h3>Deployment</h3><p>Deployment packages the code, configuration and assets so real users can reach them. It includes hosting, domains, HTTPS, environment variables, logs and reliable releases.</p></article></div>
+  <h2>What happens after a click?</h2>
+  <p>A user submits a form in the browser. The frontend sends an HTTP request to an API endpoint, the backend authenticates the user and validates the fields, then a database query reads or writes the record. The backend returns a status and JSON response, and the frontend turns that response into a loading, success or error state.</p>
+  <p>This request lifecycle is the most useful mental model for a beginner. When a feature breaks, follow the same path: inspect the browser request, check the API response, read the server log and confirm the database state.</p>
+  <h2>How to start learning</h2>
+  <p>Learn semantic HTML, modern CSS and JavaScript first. Then build a small API with Node.js, Python or Go, connect it to PostgreSQL or MongoDB and deploy a simple version. Keep each feature small enough to trace from a button click to a saved record.</p>
+  <ul><li>Build a responsive page with a form and clear validation.</li><li>Create one API resource with predictable JSON responses.</li><li>Store records with a migration and a small set of useful queries.</li><li>Deploy the app and test the complete user journey on a real device.</li></ul>
+  <h2>Why learn the whole stack?</h2>
+  <p>Understanding the complete path helps you make better decisions. You can design a useful interface, choose a clear API shape, store data safely and ship a working product. You do not need to master every tool at once. Start with one small feature and follow it from the browser to the database and back.</p>
+  <h2>Common beginner mistakes</h2>
+  <p>Many first projects mix database credentials into frontend code, skip server-side validation or return a different JSON shape from every route. Keep secrets on the server, validate at the API boundary and document a small response contract. Consistency makes every later feature easier.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

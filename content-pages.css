@@ -21,5 +21,6 @@ h2 { margin-top:2.5rem; }
 .article-body p, .article-body li { color:var(--muted); font-size:1.06rem; }
 .article-body ul { padding-left:1.3rem; }
 .article-body code { padding:.15rem .35rem; border-radius:.35rem; background:#eaf1ff; color:#1d4ed8; }
+pre { overflow:auto; margin:1.25rem 0; padding:1.1rem 1.25rem; border-radius:1rem; background:#0f172a; color:#e2e8f0; font:0.95rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; box-shadow:0 12px 30px rgba(15,23,42,.12); }
 .button { display:inline-block; margin:1rem .5rem 1rem 0; padding:.7rem 1rem; border-radius:999px; background:var(--brand); color:white; text-decoration:none; font-weight:700; }
 footer { margin-top:4rem; padding:2rem 0; border-top:1px solid #e2e8f0; color:var(--muted); }
