@@ -259,3 +259,105 @@
     animation: profileImageEnter 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     animation-delay: 0.4s;
 }
+
+/* Subtle orbital spheres around the profile image */
+.hero-orbital-system {
+    overflow: visible;
+    --orbital-width: 84%;
+    --orbital-height: 74%;
+}
+
+.hero-orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--orbital-width);
+    height: var(--orbital-height);
+    transform-origin: center;
+    will-change: transform;
+}
+
+.hero-orb-sphere {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    display: block;
+    width: var(--orb-size, 2rem);
+    height: var(--orb-size, 2rem);
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.8), transparent 28%),
+        linear-gradient(135deg, #60a5fa 0%, #6366f1 52%, #8b5cf6 100%);
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    box-shadow: 0 0 18px rgba(59, 130, 246, 0.22), inset -7px -8px 14px rgba(67, 56, 202, 0.24);
+    opacity: 0.76;
+    animation: hero-orb-bob var(--bob-speed, 4.8s) ease-in-out infinite;
+    will-change: transform;
+}
+
+.dark .hero-orb-sphere {
+    opacity: 0.9;
+    box-shadow: 0 0 24px rgba(59, 130, 246, 0.34), inset -7px -8px 14px rgba(67, 56, 202, 0.3);
+}
+
+.hero-orb-cw {
+    animation: hero-orbit-cw var(--orbit-speed, 22s) linear infinite;
+    transform: translate(-50%, -50%) rotate(var(--orb-start, 0deg));
+}
+
+.hero-orb-ccw {
+    animation: hero-orbit-ccw var(--orbit-speed, 24s) linear infinite;
+    transform: translate(-50%, -50%) rotate(var(--orb-start, 0deg));
+}
+
+.hero-orb-1 { --orb-start: 12deg; --orb-size: 3.15rem; --orbit-speed: 24s; --bob-speed: 5.3s; }
+.hero-orb-2 { --orb-start: 148deg; --orb-size: 1.8rem; --orbit-speed: 29s; --bob-speed: 4.4s; }
+.hero-orb-3 { --orb-start: 208deg; --orb-size: 2.65rem; --orbit-speed: 26s; --bob-speed: 5.8s; }
+.hero-orb-4 { --orb-start: 318deg; --orb-size: 1.55rem; --orbit-speed: 32s; --bob-speed: 4.9s; }
+
+@keyframes hero-orbit-cw {
+    from { transform: translate(-50%, -50%) rotate(var(--orb-start, 0deg)); }
+    to { transform: translate(-50%, -50%) rotate(calc(var(--orb-start, 0deg) + 360deg)); }
+}
+
+@keyframes hero-orbit-ccw {
+    from { transform: translate(-50%, -50%) rotate(var(--orb-start, 0deg)); }
+    to { transform: translate(-50%, -50%) rotate(calc(var(--orb-start, 0deg) - 360deg)); }
+}
+
+@keyframes hero-orb-bob {
+    0%, 100% { transform: translate(-50%, -50%) translateY(-3px) scale(1); }
+    50% { transform: translate(-50%, -50%) translateY(4px) scale(1.04); }
+}
+
+@media (max-width: 767px) {
+    .hero-orbital-system {
+        --orbital-width: 92%;
+        --orbital-height: 76%;
+    }
+
+    .hero-orb-1 { --orb-size: 2.35rem; }
+    .hero-orb-2 { --orb-size: 1.35rem; }
+    .hero-orb-3 { --orb-size: 2rem; }
+    .hero-orb-4 { --orb-size: 1.2rem; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hero-orbital-system {
+        --orbital-width: 78%;
+        --orbital-height: 68%;
+    }
+
+    .hero-orb-1 { --orb-size: 2.7rem; }
+    .hero-orb-2 { --orb-size: 1.55rem; }
+    .hero-orb-3 { --orb-size: 2.25rem; }
+    .hero-orb-4 { --orb-size: 1.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-orb,
+    .hero-orb-sphere {
+        animation: none;
+    }
+}
