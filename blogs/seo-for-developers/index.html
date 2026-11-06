@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SEO Basics for Developers | KRYZO</title>
+  <meta name="description" content="Technical SEO essentials for developers: semantic HTML, metadata, sitemaps and fast, crawlable pages.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="SEO Basics for Developers | KRYZO">
+  <meta property="og:description" content="The technical SEO fundamentals developers control: markup, metadata, sitemaps and page speed.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/seo-for-developers/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/seo-for-developers/seo-for-developers.jpg">
+  <meta property="article:published_time" content="2026-10-03">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/seo-for-developers/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-03">3 Oct 2026</time> · SEO guide · 7 min read</p>
+  <h1>SEO Basics for Developers</h1><p class="lede">Developers control most of what search engines can understand. These small technical habits make a site easier to find.</p>
+  <img class="article-cover" src="/blogs/seo-for-developers/seo-for-developers.jpg" alt="Search results page layout with a website preview card and metadata" onerror="this.style.display='none'">
+  <p>SEO is often treated as a marketing job, but the foundations live in the code. Search engines need to fetch your pages, understand their structure and decide what each page is about. Most of that is decided by markup you write.</p>
+  <h2>Semantic HTML and one clear h1</h2>
+  <p>Use the element that matches the meaning: <code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code> and <code>footer</code> describe the page better than a pile of <code>div</code> tags. Give every page a single <code>h1</code> that states its topic, then use <code>h2</code> and <code>h3</code> for sections in a logical order.</p>
+  <p>This helps screen readers and search engines alike, because both rely on structure rather than appearance to understand the content.</p>
+  <h2>Title and meta description</h2>
+  <p>The <code>title</code> is the headline search engines show and the text in the browser tab, so make it specific and unique per page. The meta description does not directly rank a page, but it is often used as the summary in results, so a clear, honest sentence earns more clicks.</p>
+  <pre><code>&lt;title&gt;Understanding Async/Await in JavaScript | KRYZO&lt;/title&gt;
+&lt;meta name="description" content="Learn how promises, async functions and await keep asynchronous code readable, with practical examples."&gt;</code></pre>
+  <p>Avoid duplicate titles and descriptions across pages. Uniqueness tells search engines that each URL is a distinct, useful page.</p>
+  <h2>Canonical URLs</h2>
+  <p>Visitors reach the same page through many URLs: with or without a trailing slash, with tracking parameters or through a print view. A canonical link tells search engines which version is the real one and consolidates ranking signals.</p>
+  <pre><code>&lt;link rel="canonical" href="https://www.example.com/blogs/seo-for-developers/"&gt;</code></pre>
+  <p>Use one consistent URL shape everywhere so the canonical tag and your internal links always agree.</p>
+  <h2>Open Graph basics for sharing</h2>
+  <p>Open Graph tags control how a link looks when it is shared on social platforms. They do not affect search ranking, but they make a shared page far more inviting.</p>
+  <pre><code>&lt;meta property="og:title" content="SEO Basics for Developers"&gt;
+&lt;meta property="og:description" content="Technical SEO essentials for developers."&gt;
+&lt;meta property="og:image" content="https://www.example.com/cover.jpg"&gt;
+&lt;meta property="og:url" content="https://www.example.com/blogs/seo-for-developers/"&gt;</code></pre>
+  <h2>XML sitemaps and robots.txt</h2>
+  <div class="card-grid"><article class="card"><h3>Sitemap</h3><p>An XML file listing your important URLs so crawlers can discover pages they might not otherwise find.</p></article><article class="card"><h3>robots.txt</h3><p>A text file at the site root that tells crawlers which paths they may or may not visit.</p></article><article class="card"><h3>Reference the sitemap</h3><p>Point to the sitemap from robots.txt so crawlers find it quickly.</p></article></div>
+  <pre><code>Sitemap: https://www.example.com/sitemap.xml
+Disallow: /admin/</code></pre>
+  <p>A sitemap is a hint, not a command, and a <code>Disallow</code> rule removes a page from crawl rather than from the index. Use them to guide crawlers, not to hide content you still want ranking.</p>
+  <h2>Internal links and crawlable navigation</h2>
+  <p>Links are how crawlers move through a site and how ranking value flows between pages. Use real <code>a</code> elements with descriptive text instead of JavaScript click handlers, and link related articles to each other.</p>
+  <p>Imagine the site with styles and scripts removed. If a person can still reach every page by following links, a crawler can too.</p>
+  <h2>Speed and mobile friendliness</h2>
+  <p>Fast pages that work well on phones perform better because they give users a better experience. Compress images, keep JavaScript small and use a responsive layout. These are covered in more depth in the performance and responsive design guides.</p>
+  <h2>What technical SEO can and cannot do</h2>
+  <p>Clean markup, correct metadata and a crawlable structure remove obstacles, but they are not a ranking guarantee on their own. Search engines weigh content quality, relevance and many other signals. Do the technical basics well so your content has the best possible chance, then let the content do the rest.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

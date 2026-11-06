@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>React Hooks Explained | KRYZO</title>
+  <meta name="description" content="Learn useState, useEffect and custom hooks with clear examples and the rules that keep React components predictable.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="React Hooks Explained | KRYZO">
+  <meta property="og:description" content="Understand useState, useEffect, dependency arrays and custom hooks in React.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/react-hooks-explained/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/react-hooks-explained/react-hooks-explained.jpg">
+  <meta property="article:published_time" content="2026-10-20">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/react-hooks-explained/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-20">20 Oct 2026</time> · React guide · 9 min read</p>
+  <h1>React Hooks Explained</h1><p class="lede">Hooks let function components hold state and react to changes. Learn the two you will use every day.</p>
+  <img class="article-cover" src="/blogs/react-hooks-explained/react-hooks-explained.jpg" alt="React component code showing useState and useEffect hooks" onerror="this.style.display='none'">
+  <p>Before hooks, only class components could hold state, and logic was split across lifecycle methods with names like <code>componentDidMount</code>. Hooks let plain functions do the same job, and they let you group related logic together instead of spreading it across a component.</p>
+  <h2>useState holds a value between renders</h2>
+  <p>When a component re-renders, its local variables are recalculated. <code>useState</code> gives you a value that survives those re-renders and a function to update it. Calling the updater tells React to render the component again with the new value.</p>
+  <pre><code>import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+      Clicked {count} times
+    &lt;/button&gt;
+  );
+}</code></pre>
+  <p>The array destructuring reads clearly: the first item is the current value and the second is the setter. Never change the value directly; always go through the setter so React knows to re-render.</p>
+  <h2>useEffect runs side effects</h2>
+  <p>Rendering should be pure, so anything that reaches outside the component, such as fetching data or subscribing to events, belongs in <code>useEffect</code>. React runs the effect after the render completes.</p>
+  <pre><code>import { useEffect, useState } from "react";
+
+function UserName({ id }) {
+  const [name, setName] = useState("");
+
+  useEffect(() =&gt; {
+    let active = true;
+    fetch(`/api/users/${id}`)
+      .then((response) =&gt; response.json())
+      .then((user) =&gt; {
+        if (active) setName(user.name);
+      });
+    return () =&gt; {
+      active = false;
+    };
+  }, [id]);
+
+  return &lt;p&gt;{name}&lt;/p&gt;;
+}</code></pre>
+  <p>The dependency array decides when the effect re-runs. Listing <code>[id]</code> means it runs once on mount and again whenever <code>id</code> changes. An empty array runs it once, and omitting the array runs it after every render.</p>
+  <h2>Cleaning up effects</h2>
+  <p>Some effects start something that must be stopped: a timer, a subscription or an in-flight request. Return a function from the effect to clean up, and React calls it before the next run and when the component unmounts.</p>
+  <p>The <code>active</code> flag above is a simple version of this. It prevents an old request from writing state after the component has moved on, which is a common source of confusing bugs.</p>
+  <h2>The rules of hooks</h2>
+  <div class="card-grid"><article class="card"><h3>Call them at the top level</h3><p>Never call a hook inside a condition, loop or nested function. Order must be identical on every render.</p></article><article class="card"><h3>Only from functions React knows</h3><p>Call hooks from components or from your own custom hooks, never from an ordinary helper function.</p></article><article class="card"><h3>Name custom hooks with use</h3><p>Starting a function name with <code>use</code> lets React and linters treat it as a hook.</p></article></div>
+  <p>React relies on the order of hook calls to match state with a component. Branches that sometimes call a hook break that order, which is why the rules exist.</p>
+  <h2>Building a small custom hook</h2>
+  <p>When the same logic appears in several components, extract it into a custom hook. It is just a function whose name starts with <code>use</code> and that may call other hooks.</p>
+  <pre><code>import { useEffect, useState } from "react";
+
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() =&gt; {
+    const onResize = () =&gt; setWidth(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () =&gt; window.removeEventListener("resize", onResize);
+  }, []);
+
+  return width;
+}</code></pre>
+  <p>Any component can now call <code>useWindowWidth()</code> and receive the current width. The component stays focused on rendering, and the reusable behaviour lives in one tested place.</p>
+  <h2>useMemo and useCallback</h2>
+  <p>These two hooks cache a value or a function between renders so that unchanged dependencies do not trigger extra work. Use them when a calculation is genuinely expensive or when a stable reference is required by a memoised child. Reaching for them everywhere adds complexity without a real gain.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

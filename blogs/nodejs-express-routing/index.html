@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Node.js and Express Routing | KRYZO</title>
+  <meta name="description" content="Understand routing, middleware and request handling in Node.js with Express to build clean server applications.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Node.js and Express Routing | KRYZO">
+  <meta property="og:description" content="Learn Express routers, route parameters, middleware and request handling step by step.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/nodejs-express-routing/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/nodejs-express-routing/nodejs-express-routing.jpg">
+  <meta property="article:published_time" content="2026-10-17">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/nodejs-express-routing/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-17">17 Oct 2026</time> · Backend guide · 8 min read</p>
+  <h1>Node.js and Express Routing</h1><p class="lede">Express keeps a Node.js server organised. This guide covers routes, parameters and middleware.</p>
+  <img class="article-cover" src="/blogs/nodejs-express-routing/nodejs-express-routing.jpg" alt="Node.js server code defining Express routes and middleware" onerror="this.style.display='none'">
+  <p>Node.js gives you a runtime for JavaScript on the server. Its built-in <code>http</code> module can serve requests, but you end up matching URLs and parsing bodies by hand. <strong>Express</strong> is a small framework that handles those chores so you can focus on route logic.</p>
+  <h2>A server without and with Express</h2>
+  <p>A bare Node.js server checks the request method and URL manually. Express replaces that plumbing with readable route definitions and a request object that is easier to work with.</p>
+  <pre><code>const express = require("express");
+const app = express();
+
+app.get("/health", (req, res) =&gt; {
+  res.json({ status: "ok" });
+});
+
+app.listen(3000, () =&gt; console.log("Listening on port 3000"));</code></pre>
+  <p>Each route pairs a method and a path with a handler that receives the request and response objects.</p>
+  <h2>GET and POST routes</h2>
+  <p>Routes are grouped by HTTP method, which maps directly onto what the request does. A GET reads data, and a POST creates it after validating the body.</p>
+  <pre><code>app.get("/notes", (req, res) =&gt; {
+  res.json(notes);
+});
+
+app.post("/notes", (req, res) =&gt; {
+  const note = { id: nextId++, title: req.body.title };
+  notes.push(note);
+  res.status(201).json(note);
+});</code></pre>
+  <p>Returning the created record with a <code>201</code> status gives the client an identifier it can use immediately.</p>
+  <h2>Route parameters and query strings</h2>
+  <p>A route parameter is a named segment in the path, available on <code>req.params</code>. Query strings come after the question mark and appear on <code>req.query</code>.</p>
+  <pre><code>app.get("/notes/:id", (req, res) =&gt; {
+  const note = notes.find((item) =&gt; item.id === Number(req.params.id));
+  if (!note) return res.status(404).json({ error: "Not found" });
+  res.json(note);
+});
+
+// GET /search?q=express -&gt; req.query.q === "express"</code></pre>
+  <p>Use parameters to identify a specific resource and query strings for optional filters such as search terms or pagination.</p>
+  <h2>Splitting routes with express.Router</h2>
+  <p>As an app grows, keeping every route in one file becomes unwieldy. <code>express.Router</code> creates a mini application you can mount under a base path.</p>
+  <pre><code>// routes/notes.js
+const router = require("express").Router();
+
+router.get("/", (req, res) =&gt; res.json(notes));
+
+module.exports = router;
+
+// app.js
+app.use("/notes", require("./routes/notes"));</code></pre>
+  <p>Each file owns one resource, so the project stays navigable even with many endpoints.</p>
+  <h2>Middleware and why next matters</h2>
+  <p>Middleware are functions that run before the final handler. Each receives the request, the response and <code>next</code>, and can inspect, modify or end the request.</p>
+  <pre><code>app.use((req, res, next) =&gt; {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});</code></pre>
+  <p>Calling <code>next()</code> passes control to the following middleware or route. Forget it and the request hangs, waiting forever. Middleware runs in the order it is registered, which is why logging and parsing usually appear near the top.</p>
+  <h2>Parsing JSON bodies</h2>
+  <p>Express does not parse request bodies by default. Add the built-in JSON parser so that <code>req.body</code> is populated for POST and PUT requests.</p>
+  <pre><code>app.use(express.json());</code></pre>
+  <p>Register it before the routes that read the body, and always validate what arrives rather than trusting the client.</p>
+  <h2>Error-handling middleware</h2>
+  <div class="card-grid"><article class="card"><h3>Four arguments</h3><p>An error handler is recognised by its signature of four parameters, so keep all four even if unused.</p></article><article class="card"><h3>Placed last</h3><p>Register it after all routes and middleware so it catches anything they pass along.</p></article><article class="card"><h3>Return a status</h3><p>Respond with a clear status code and a safe message, and log the details on the server.</p></article></div>
+  <pre><code>app.use((err, req, res, next) =&gt; {
+  console.error(err);
+  res.status(500).json({ error: "Internal server error" });
+});</code></pre>
+  <p>With routes, middleware and one clear error handler, an Express application stays easy to read and safe to extend.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

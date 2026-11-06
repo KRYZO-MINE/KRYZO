@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Responsive Design: A Mobile-First Approach | KRYZO</title>
+  <meta name="description" content="Build interfaces that work everywhere using fluid layouts, breakpoints and a mobile-first CSS strategy.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Responsive Design: A Mobile-First Approach | KRYZO">
+  <meta property="og:description" content="Learn mobile-first CSS, fluid layouts, media queries and flexible images for responsive design.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/responsive-design-mobile-first/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/responsive-design-mobile-first/responsive-design-mobile-first.jpg">
+  <meta property="article:published_time" content="2026-10-06">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/responsive-design-mobile-first/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-06">6 Oct 2026</time> · CSS guide · 6 min read</p>
+  <h1>Responsive Design: A Mobile-First Approach</h1><p class="lede">Most visitors arrive on a phone. Designing for the small screen first makes the whole layout stronger.</p>
+  <img class="article-cover" src="/blogs/responsive-design-mobile-first/responsive-design-mobile-first.jpg" alt="Website shown side by side on a phone, tablet and desktop screen" onerror="this.style.display='none'">
+  <p>A site is not finished when it looks right on your laptop. Real visitors use phones in bright light on slow networks, tablets in the middle of the range and large monitors without a touch screen. Responsive design keeps one codebase working across all of them.</p>
+  <h2>What mobile-first means</h2>
+  <p>Mobile-first means writing the base CSS for the small screen and then adding enhancements as the viewport grows. The default styles target the tightest space, and media queries only ever add or adjust.</p>
+  <p>This is easier than the reverse because a single column is simple. Building outward prevents the trap of designing a wide layout and then trying to squeeze it back down.</p>
+  <h2>The viewport meta tag</h2>
+  <p>Without a viewport tag, phones assume a desktop width and shrink the whole page. One line in the head tells the browser to match the device width.</p>
+  <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+  <p>With this in place, your CSS pixels match the device, and the rest of the strategy can work.</p>
+  <h2>Fluid widths and max-width</h2>
+  <p>Fixed pixel widths break on small screens. Percentages and flexible units let content fill the space it is given.</p>
+  <pre><code>.container {
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.card {
+  width: 100%;
+}</code></pre>
+  <p>The container grows with the viewport but stops at a comfortable reading width on large screens. Text remains readable and lines do not stretch uncomfortably wide.</p>
+  <h2>Media queries that enhance upward</h2>
+  <p>Once the base layout is solid, add a breakpoint where the design needs more room. Because you started small, each query simply upgrades the layout.</p>
+  <pre><code>/* base: single column for phones */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* tablets and up */
+@media (min-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* desktops and up */
+@media (min-width: 960px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}</code></pre>
+  <p>Using <code>min-width</code> keeps the cascade logical: later, wider rules layer on top of the earlier ones rather than undoing them.</p>
+  <h2>Flexible images and media</h2>
+  <p>An image wider than its container can cause horizontal scrolling. A single rule prevents it, and pairing it with the <code>srcset</code> attribute lets the browser choose a suitable file size.</p>
+  <pre><code>img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}</code></pre>
+  <h2>Touch targets and readable text</h2>
+  <div class="card-grid"><article class="card"><h3>Tap size</h3><p>Buttons and links need a target of roughly 44 by 44 pixels so a thumb can hit them.</p></article><article class="card"><h3>Space between</h3><p>Give interactive elements enough gap so neighbours are not tapped by mistake.</p></article><article class="card"><h3>Body text</h3><p>Keep base font size around 16 pixels and avoid tiny text on phones.</p></article></div>
+  <p>Hover states do not exist on touch, so important interactions should never rely on a mouse hover to be discoverable.</p>
+  <h2>Testing with emulation</h2>
+  <p>Developer tools include a device toolbar that emulates common screen sizes. Toggle it to check several widths, then open the site on a real phone, because emulation cannot show how a real thumb reaches a button or how a slow connection feels.</p>
+  <p>Resize the window slowly while watching the layout. If it holds together at every width, the mobile-first foundation is doing its job.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

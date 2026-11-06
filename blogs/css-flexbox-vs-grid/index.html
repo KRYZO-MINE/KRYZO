@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CSS Flexbox vs Grid: When To Use Which | KRYZO</title>
+  <meta name="description" content="Compare CSS Flexbox and Grid with practical layout examples, and learn which one to reach for in real interfaces.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="CSS Flexbox vs Grid: When To Use Which | KRYZO">
+  <meta property="og:description" content="Understand the difference between CSS Flexbox and Grid and pick the right tool per layout.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/css-flexbox-vs-grid/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/css-flexbox-vs-grid/css-flexbox-vs-grid.jpg">
+  <meta property="article:published_time" content="2026-10-31">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/css-flexbox-vs-grid/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-31">31 Oct 2026</time> · CSS guide · 6 min read</p>
+  <h1>CSS Flexbox vs Grid: When To Use Which</h1><p class="lede">Both Flexbox and Grid arrange elements, but they solve different problems. This guide shows when each one wins.</p>
+  <img class="article-cover" src="/blogs/css-flexbox-vs-grid/css-flexbox-vs-grid.jpg" alt="Web layout wireframe comparing flexbox rows with a grid of columns" onerror="this.style.display='none'">
+  <p>For years developers used floats and clearfixes to build layouts. Flexbox and Grid changed that, but they are not competitors. The simplest way to decide between them is to count dimensions.</p>
+  <h2>One dimension versus two</h2>
+  <p>Flexbox lays out items along a single axis, either a row or a column. You decide the direction and the items flow along it. Grid lays out items on two axes at once, rows and columns, so you can place an item precisely in the grid you define.</p>
+  <p>If you are arranging a set of things in a line, reach for Flexbox. If you are describing an actual grid of rows and columns, reach for Grid. Many real interfaces use both at the same time.</p>
+  <h2>Flexbox basics</h2>
+  <p>Turning an element into a flex container is one line. Its direct children become flex items, and you distribute them with alignment properties.</p>
+  <pre><code>.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}</code></pre>
+  <p><code>justify-content</code> spaces items along the main axis, while <code>align-items</code> aligns them on the cross axis. Adding <code>flex-wrap</code> lets items move to a new line when space runs out, and <code>gap</code> adds consistent spacing without margin hacks.</p>
+  <h2>Grid basics</h2>
+  <p>Grid shines when you know you want columns. The <code>fr</code> unit divides the free space, and <code>repeat</code> keeps the rule short.</p>
+  <pre><code>.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}</code></pre>
+  <p>For a responsive grid that adds columns as the screen widens, combine <code>repeat</code> with <code>auto-fit</code> and <code>minmax</code>. This gives cards a sensible minimum size and fills the row automatically.</p>
+  <pre><code>.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}</code></pre>
+  <h2>A card grid and a navbar</h2>
+  <div class="card-grid"><article class="card"><h3>Card grid</h3><p>Use Grid. You are arranging items into columns that need to line up across rows.</p></article><article class="card"><h3>Navbar</h3><p>Use Flexbox. A logo and a set of links sit in a single row that needs to spread out.</p></article><article class="card"><h3>Centering</h3><p>Both work. Flexbox with <code>align-items</code> and <code>justify-content</code> centers one item cleanly.</p></article></div>
+  <p>A navigation bar is a row with items pushed to the edges, which is exactly what Flexbox does best. A product listing with equal-width cards across several rows is a Grid problem. Choosing based on the shape of the content keeps the CSS short.</p>
+  <h2>Combining both</h2>
+  <p>The two systems nest happily. A page can use Grid for the overall structure, then Flexbox inside a header cell to align a title and a button. Flex items can also be grid items and the reverse, so you never have to pick one for the entire page.</p>
+  <h2>When to use which</h2>
+  <p>Use Flexbox for rows or columns of items, navigation, toolbars, and distributing space along one axis. Use Grid for page frameworks, galleries, dashboards and any layout where rows and columns must align. When in doubt, ask whether you are thinking in one line or in a table, and the choice usually becomes obvious.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

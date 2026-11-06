@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Securing APIs With JWT | KRYZO</title>
+  <meta name="description" content="Learn how JSON Web Tokens work, how to sign and verify them, and the habits that keep API sessions safe.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Securing APIs With JWT | KRYZO">
+  <meta property="og:description" content="How JSON Web Tokens are structured, signed, verified and stored safely in an API.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/api-authentication-jwt/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/api-authentication-jwt/api-authentication-jwt.jpg">
+  <meta property="article:published_time" content="2026-10-13">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/api-authentication-jwt/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-13">13 Oct 2026</time> · Security guide · 8 min read</p>
+  <h1>Securing APIs With JWT</h1><p class="lede">A JSON Web Token proves who is calling your API. Here is how the three parts fit together and how to use them safely.</p>
+  <img class="article-cover" src="/blogs/api-authentication-jwt/api-authentication-jwt.jpg" alt="API security diagram showing a JSON Web Token with header, payload and signature" onerror="this.style.display='none'">
+  <p>A <strong>JSON Web Token</strong>, usually shortened to JWT, is a compact string a server hands to a client after a successful login. The client sends it back on later requests so the server can recognise who is calling without checking a session store on every call.</p>
+  <h2>The three parts of a token</h2>
+  <p>A JWT is three base64url chunks joined by dots: a header, a payload and a signature. Anyone can decode and read the first two, so the token is a container, not a secret vault.</p>
+  <div class="card-grid"><article class="card"><h3>Header</h3><p>Names the signing algorithm and the token type, for example <code>{"alg":"HS256","typ":"JWT"}</code>.</p></article><article class="card"><h3>Payload</h3><p>The claims: user id, roles and an expiry time. This is readable by anyone holding the token.</p></article><article class="card"><h3>Signature</h3><p>Produced from the header and payload with a secret key. It proves the token was not altered.</p></article></div>
+  <p>The most important consequence: the payload is <strong>signed, not encrypted</strong>. Never put passwords, secrets or private data in it, because a curious client can simply decode it.</p>
+  <h2>How signing and verification work</h2>
+  <p>When the server creates a token it signs the header and payload with a secret key. When a request arrives, the server recomputes the signature and compares. If even one character of the payload changed, the signatures differ and the token is rejected.</p>
+  <pre><code>const jwt = require("jsonwebtoken");
+
+const token = jwt.sign(
+  { sub: user.id, role: user.role },
+  process.env.JWT_SECRET,
+  { expiresIn: "15m" }
+);</code></pre>
+  <p>Keep the signing secret in an environment variable, never in source code, and rotate it if it is ever exposed.</p>
+  <h2>Sending the token</h2>
+  <p>Clients send the token in the <code>Authorization</code> header using the Bearer scheme. This keeps credentials out of the URL, where they could be logged or shared.</p>
+  <pre><code>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code></pre>
+  <h2>Verifying on every protected route</h2>
+  <p>Verification is not a one-time step. Every protected endpoint must check the token before doing any work, and it must reject a token that fails verification or has expired.</p>
+  <pre><code>function requireAuth(req, res, next) {
+  const header = req.headers.authorization || "";
+  const token = header.startsWith("Bearer ") ? header.slice(7) : null;
+
+  if (!token) return res.status(401).json({ error: "Missing token" });
+
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (err) {
+    res.status(401).json({ error: "Invalid or expired token" });
+  }
+}</code></pre>
+  <p>Always use the library's <code>verify</code> method rather than decoding the payload yourself. Decoding skips the signature check and trusts data an attacker could forge.</p>
+  <h2>Short expiry and refresh tokens</h2>
+  <p>If a token is stolen, it stays valid until it expires, so a short lifetime limits the damage. A common pattern pairs a short-lived access token, such as fifteen minutes, with a longer-lived refresh token stored securely and used only to issue new access tokens.</p>
+  <p>Refresh endpoints should be strictly checked, rate limited and able to revoke a token that is no longer trusted.</p>
+  <h2>Storage and transport cautions</h2>
+  <p>Always serve APIs over <strong>HTTPS</strong> so tokens cannot be read in transit. Storing long-lived tokens in <code>localStorage</code> makes them readable by any script on the page, so a single cross-site scripting bug can leak them. Prefer short-lived tokens held in memory, or server-set cookies marked <code>HttpOnly</code>, <code>Secure</code> and a suitable <code>SameSite</code> value.</p>
+  <h2>Common mistakes</h2>
+  <p>Trusting the payload without verifying, accepting the <code>none</code> algorithm, keeping the secret in the repository and issuing tokens that never expire are all avoidable. Validate the signature, keep expiry short, and treat the token as a claim to confirm rather than a fact to believe.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

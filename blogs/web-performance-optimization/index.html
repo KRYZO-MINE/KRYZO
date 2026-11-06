@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Web Performance Optimization | KRYZO</title>
+  <meta name="description" content="Practical wins for faster sites: image optimisation, caching, lazy loading and smaller JavaScript bundles.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Web Performance Optimization | KRYZO">
+  <meta property="og:description" content="Practical techniques to make web pages load and feel faster.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/web-performance-optimization/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/web-performance-optimization/web-performance-optimization.jpg">
+  <meta property="article:published_time" content="2026-10-10">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/web-performance-optimization/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-10">10 Oct 2026</time> · Performance guide · 7 min read</p>
+  <h1>Web Performance Optimization</h1><p class="lede">Speed affects how users feel about a product and how search engines rank it. These changes give the biggest wins.</p>
+  <img class="article-cover" src="/blogs/web-performance-optimization/web-performance-optimization.jpg" alt="Browser performance panel showing page load timings and network requests" onerror="this.style.display='none'">
+  <p>Performance work has a reputation for being complicated, but most real gains come from a handful of habits. The trick is to measure first, fix the biggest problem, then measure again.</p>
+  <h2>Measure before you optimise</h2>
+  <p>Every browser ships developer tools with a Network panel and a Performance panel. Load your page with the panel open and watch what takes the longest. Optimising something you never measured is guesswork.</p>
+  <p>The <strong>Core Web Vitals</strong> are three user-focused metrics worth knowing in plain words. Largest Contentful Paint is how long until the main content appears. Interaction to Next Paint is how quickly the page responds when tapped. Cumulative Layout Shift is how much the page jumps around while loading.</p>
+  <h2>Compress and correctly size images</h2>
+  <p>Images are usually the heaviest resources on a page. Serving a 3000-pixel photo into a 400-pixel slot wastes bandwidth and slows the load. Resize images to roughly the size they are displayed, then compress them.</p>
+  <pre><code>&lt;img src="/hero-800.jpg"
+     srcset="/hero-400.jpg 400w,
+             /hero-800.jpg 800w,
+             /hero-1600.jpg 1600w"
+     sizes="(max-width: 600px) 100vw, 800px"
+     width="800" height="450"
+     alt="Product dashboard overview"&gt;</code></pre>
+  <p>The <code>srcset</code> and <code>sizes</code> attributes let the browser pick the smallest suitable file. Modern formats such as WebP and AVIF are smaller than older ones at the same quality.</p>
+  <h2>Lazy load offscreen images</h2>
+  <p>Images far down the page do not need to load immediately. The native <code>loading</code> attribute defers them until the user scrolls near, which speeds up the initial render.</p>
+  <pre><code>&lt;img src="/gallery-1.jpg" loading="lazy" width="600" height="400" alt="Gallery item"&gt;</code></pre>
+  <p>Keep the above-the-fold hero eager and reserve space with width and height so the layout does not shift when the image arrives.</p>
+  <h2>Reduce JavaScript and render-blocking resources</h2>
+  <p>JavaScript is expensive because it must be downloaded, parsed and executed. Every extra library adds delay. Audit your bundle, remove what is unused and split large scripts so the page can render before all of them arrive.</p>
+  <pre><code>&lt;script src="/app.js" defer&gt;&lt;/script&gt;</code></pre>
+  <p>The <code>defer</code> attribute downloads the script without pausing the HTML parser and runs it after the document is ready. Inline critical CSS or load non-critical stylesheets without blocking the first paint.</p>
+  <h2>Cache static assets and use a CDN</h2>
+  <div class="card-grid"><article class="card"><h3>Long cache headers</h3><p>Give versioned assets a long <code>max-age</code> so repeat visits skip the download.</p></article><article class="card"><h3>Content hashing</h3><p>Name files with a hash like <code>app.4f2c.js</code> so a change produces a new URL.</p></article><article class="card"><h3>Content delivery network</h3><p>Serve assets from a location near the user to cut network latency.</p></article></div>
+  <p>Cache headers and content hashing work together: files can be cached almost forever because a new version always has a new name.</p>
+  <h2>A short checklist</h2>
+  <ul><li>Resize and compress every image, and use a modern format.</li><li>Lazy load images and iframes that are below the fold.</li><li>Trim unused JavaScript and defer the rest.</li><li>Set long cache headers on fingerprinted assets.</li><li>Serve static files through a CDN.</li><li>Re-measure after each change so you know it helped.</li></ul>
+  <p>Do these consistently and most sites feel noticeably faster without any exotic techniques.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

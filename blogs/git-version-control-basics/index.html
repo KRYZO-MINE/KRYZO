@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Git and Version Control Basics | KRYZO</title>
+  <meta name="description" content="Understand repositories, commits, branches and pull requests - the everyday Git workflow every developer needs.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Git and Version Control Basics | KRYZO">
+  <meta property="og:description" content="A practical walkthrough of repositories, commits, branches, merges and pull requests in Git.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/git-version-control-basics/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/git-version-control-basics/git-version-control-basics.jpg">
+  <meta property="article:published_time" content="2026-10-24">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/git-version-control-basics/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-24">24 Oct 2026</time> · Developer workflow · 7 min read</p>
+  <h1>Git and Version Control Basics</h1><p class="lede">Version control keeps your work safe and your team in sync. These are the Git commands you will actually use.</p>
+  <img class="article-cover" src="/blogs/git-version-control-basics/git-version-control-basics.jpg" alt="Terminal window showing git commit and branch commands" onerror="this.style.display='none'">
+  <p>Before version control, teams copied folders named <code>project-final</code> and <code>project-final-v2</code>. Git replaced that with a precise history of every change, who made it and why. Learning a small set of commands covers almost everything you will do day to day.</p>
+  <h2>What a repository is</h2>
+  <p>A <strong>repository</strong> is a project folder that Git tracks. It contains your files plus a hidden history of every committed change. You can create one from scratch or copy an existing one from a remote server.</p>
+  <p>The repository records snapshots rather than just the current state, so you can compare versions, undo mistakes and see how a file evolved over weeks or years.</p>
+  <h2>Working tree, staging area and history</h2>
+  <p>Git organises your work into three places. The <strong>working tree</strong> is the files as they are right now. The <strong>staging area</strong> holds the changes you have chosen for the next snapshot. The <strong>commit history</strong> is the permanent record once you save that snapshot.</p>
+  <div class="card-grid"><article class="card"><h3>Working tree</h3><p>The editable files on disk. Changes here are not yet recorded by Git.</p></article><article class="card"><h3>Staging area</h3><p>Changes you ran <code>git add</code> on, lined up for the next commit.</p></article><article class="card"><h3>History</h3><p>Committed snapshots, each with a message, an author and a unique identifier.</p></article></div>
+  <p>Staging lets you commit a focused, reviewable change even when you have edited several unrelated files.</p>
+  <h2>Starting out and committing</h2>
+  <p>Turn a folder into a repository with <code>git init</code>, or copy a project from a server with <code>git clone</code>. From there the rhythm is always the same: check what changed, stage the change, then commit it with a clear message.</p>
+  <pre><code>git init
+git status
+git add src/app.js
+git commit -m "Add search filter to the notes list"</code></pre>
+  <p>Writing messages that explain the intent, not just the file name, makes history readable months later.</p>
+  <h2>Branching and switching</h2>
+  <p>A branch is a movable pointer to a line of work. The default branch is often called <code>main</code>. You create a branch so experimental or in-progress work never disturbs the stable version.</p>
+  <pre><code>git switch -c feature/dark-mode
+# make changes...
+git add .
+git commit -m "Add dark mode toggle"</code></pre>
+  <p>Switching branches swaps the files in your working tree to match that line of work, so you can jump between tasks without copying folders.</p>
+  <h2>Merging and resolving conflicts</h2>
+  <p>When a branch is ready, merge it back. If the same lines were changed in two branches, Git marks a <strong>conflict</strong> and asks you to choose. You edit the file to keep the correct lines, remove the conflict markers, then stage and commit the result.</p>
+  <p>Conflicts look alarming the first time but are usually small. Read both versions, decide what the code should be, and run your tests before committing the merge.</p>
+  <h2>Remotes, push and pull</h2>
+  <p>A <strong>remote</strong> is a shared copy of the repository hosted on a service like GitHub or GitLab. Pushing sends your commits there; pulling brings other people's commits to you.</p>
+  <pre><code>git remote add origin https://example.com/team/project.git
+git push -u origin main
+git pull</code></pre>
+  <p>Pulling regularly keeps your local copy close to the shared one, which keeps merges small and conflicts rare.</p>
+  <h2>What a pull request is</h2>
+  <p>A pull request is a request to merge one branch into another, opened on the hosting platform. It gives teammates a place to review the diff, comment and run automated checks before the change lands. It is a conversation wrapped around a merge, and it keeps the main branch trustworthy.</p>
+  <h2>The everyday commands</h2>
+  <p>You can go surprisingly far with a short list. Keep it handy and the rest will stick with practice.</p>
+  <pre><code>git status              # what changed
+git add &lt;file&gt;          # stage a change
+git commit -m "msg"     # save a snapshot
+git switch -c &lt;name&gt;    # start a branch
+git pull                # get latest changes
+git push                # share your commits
+git log --oneline       # review history</code></pre>
+  <p>Learn these seven well before reaching for advanced commands. They cover the safe, collaborative workflow that most projects rely on every day.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

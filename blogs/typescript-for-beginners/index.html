@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TypeScript for Beginners | KRYZO</title>
+  <meta name="description" content="A beginner-friendly introduction to TypeScript types, interfaces, generics and how they make JavaScript safer.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="TypeScript for Beginners | KRYZO">
+  <meta property="og:description" content="Learn TypeScript types, interfaces and generics with simple, practical examples.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/typescript-for-beginners/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/typescript-for-beginners/typescript-for-beginners.jpg">
+  <meta property="article:published_time" content="2026-10-27">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/typescript-for-beginners/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-10-27">27 Oct 2026</time> · TypeScript guide · 8 min read</p>
+  <h1>TypeScript for Beginners</h1><p class="lede">TypeScript adds types to JavaScript so mistakes are caught before the code ever runs. Start here.</p>
+  <img class="article-cover" src="/blogs/typescript-for-beginners/typescript-for-beginners.jpg" alt="TypeScript source file with typed function signatures in a code editor" onerror="this.style.display='none'">
+  <p>JavaScript is flexible. That flexibility is a strength until a typo in a property name or a wrong argument type silently breaks a feature in production. <strong>TypeScript</strong> adds an optional type layer on top of JavaScript to catch those mistakes while you write code.</p>
+  <p>It is not a different language to learn from scratch. Every valid JavaScript file is already close to valid TypeScript, and you can add types gradually.</p>
+  <h2>What TypeScript is and how it compiles</h2>
+  <p>Browsers and Node.js run JavaScript, not TypeScript. A compiler strips the type annotations away and produces plain JavaScript that any runtime can execute. If the types do not line up, the compiler reports an error before you ever open a browser.</p>
+  <p>This means the types disappear at runtime and add no cost to the shipped code. They exist to help you and your editor, not the machine.</p>
+  <h2>Basic types and inference</h2>
+  <p>TypeScript understands the common types: <code>string</code>, <code>number</code>, <code>boolean</code>, arrays and objects. In most cases you do not need to write the type at all, because it infers the type from the value you assign.</p>
+  <pre><code>let title = "Dashboard";
+title = 42; // Error: number is not assignable to string
+
+const tags = ["css", "html"];
+tags.push("grid");
+tags.push(true); // Error: boolean is not assignable to string</code></pre>
+  <p>Inference keeps code clean while still protecting you. You annotate only where a value has no obvious initial form, such as a function parameter.</p>
+  <h2>Typing function parameters and return values</h2>
+  <p>Function boundaries are where types pay off most. Describing the inputs and the return value documents the function and prevents callers from passing the wrong thing.</p>
+  <pre><code>function formatPrice(amount: number, currency: string): string {
+  return `${currency}${amount.toFixed(2)}`;
+}
+
+formatPrice("ten", "USD"); // Error: string is not assignable to number</code></pre>
+  <p>The return type is often inferred, so the <code>: string</code> is optional, but it makes the contract explicit and catches mistakes inside the function body.</p>
+  <h2>Interfaces and object shapes</h2>
+  <p>An interface names the shape of an object. It is the clearest way to describe the data your app passes around.</p>
+  <pre><code>interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+function greet(user: User): string {
+  return `Hello, ${user.name}`;
+}</code></pre>
+  <p>Once a value is typed as <code>User</code>, the editor autocompletes its properties and flags any misspelled field immediately.</p>
+  <h2>Unions and optional properties</h2>
+  <p>Real data is rarely uniform. A union lets a value be one of several types, and the question mark marks a property that may be absent.</p>
+  <pre><code>interface Task {
+  id: number;
+  title: string;
+  completed: boolean;
+  dueDate?: string;
+  status: "todo" | "doing" | "done";
+}</code></pre>
+  <p>The <code>dueDate</code> may be missing, so TypeScript forces you to check for it before use. The <code>status</code> field can only ever be one of the three listed strings, which removes a whole class of typos.</p>
+  <h2>Where generics fit in</h2>
+  <p>A generic lets a function or interface work with many types while keeping the relationship between input and output. A wrapper around an API response is a common example.</p>
+  <pre><code>interface ApiResponse&lt;T&gt; {
+  data: T;
+  status: number;
+}
+
+function unwrap&lt;T&gt;(response: ApiResponse&lt;T&gt;): T {
+  return response.data;
+}</code></pre>
+  <p>You do not need generics every day, but recognising the angle-bracket syntax makes library types far less intimidating.</p>
+  <h2>Turning on strict mode</h2>
+  <p>TypeScript is most valuable when its strictest checks are active. In <code>tsconfig.json</code>, enabling <code>strict</code> turns on a group of checks including strict null handling, which is where many real bugs hide.</p>
+  <pre><code>{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2020",
+    "module": "ESNext"
+  }
+}</code></pre>
+  <p>Start with <code>strict</code> on a new project. It is much easier than adding it later, and it is the single setting that gives the most confidence that your types are telling the truth.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>

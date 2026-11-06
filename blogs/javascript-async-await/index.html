@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Understanding Async/Await in JavaScript | KRYZO</title>
+  <meta name="description" content="Learn how JavaScript promises, async functions and await keep asynchronous code readable, with practical error handling examples.">
+  <meta name="author" content="Sahil Jangra">
+  <meta property="og:title" content="Understanding Async/Await in JavaScript | KRYZO">
+  <meta property="og:description" content="A practical guide to promises, async functions, await and error handling in modern JavaScript.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.kryzo.space/blogs/javascript-async-await/">
+  <meta property="og:image" content="https://www.kryzo.space/blogs/javascript-async-await/javascript-async-await.jpg">
+  <meta property="article:published_time" content="2026-11-03">
+  <link rel="icon" type="image/png" href="/favicon-48.png">
+  <link rel="canonical" href="https://www.kryzo.space/blogs/javascript-async-await/">
+  <link rel="stylesheet" href="/content-pages.css">
+</head>
+<body><header><a href="/">KRYZO.</a><nav><a href="/">Home</a><a href="/projects/">Projects</a><a href="/blogs/">Blogs</a></nav></header><main>
+  <p class="article-meta"><time datetime="2026-11-03">3 Nov 2026</time> · JavaScript guide · 7 min read</p>
+  <h1>Understanding Async/Await in JavaScript</h1><p class="lede">Async code does not have to be hard to follow. Here is how promises, async and await fit together in real projects.</p>
+  <img class="article-cover" src="/blogs/javascript-async-await/javascript-async-await.jpg" alt="JavaScript code editor showing asynchronous functions with async and await keywords" onerror="this.style.display='none'">
+  <p>JavaScript runs on a single thread, so long operations such as reading a file, calling an API or querying a database cannot block the page. Instead they run in the background and hand back a result when they finish. The awkward part has always been how that result is delivered without turning code into a puzzle.</p>
+  <p>Modern code uses <strong>promises</strong> for that delivery and two keywords, <strong>async</strong> and <strong>await</strong>, to make promise-based code read like ordinary step-by-step instructions.</p>
+  <h2>Why callbacks became painful</h2>
+  <p>The original approach passed a function to be called when work finished. One callback is fine, but when each step depends on the previous one, callbacks nest inside callbacks. The code marches to the right, error handling is duplicated at every level, and reading the sequence of steps becomes difficult.</p>
+  <p>Callbacks are not wrong, but they make dependency chains and shared error handling hard to review. Promises were introduced to give that chain a single, composable shape.</p>
+  <h2>What a Promise actually is</h2>
+  <p>A promise is an object that represents a value you do not have yet. It is always in one of three states, and it only moves forward.</p>
+  <div class="card-grid"><article class="card"><h3>Pending</h3><p>The operation has started but has not settled. Neither success nor failure has happened yet.</p></article><article class="card"><h3>Fulfilled</h3><p>The operation finished successfully and produced a value that the promise now holds.</p></article><article class="card"><h3>Rejected</h3><p>The operation failed and carries a reason, usually an <code>Error</code> describing what went wrong.</p></article></div>
+  <p>Because a promise is a plain value, you can pass it around, return it from a function and combine several of them before awaiting the result.</p>
+  <h2>Rewriting with async and await</h2>
+  <p>Marking a function <code>async</code> makes it return a promise automatically. Inside it you can use <code>await</code> to pause until another promise settles and then continue with its value. The code below reads top to bottom even though the work is asynchronous.</p>
+  <pre><code>async function loadUser(id) {
+  const response = await fetch(`/api/users/${id}`);
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+  return response.json();
+}</code></pre>
+  <p>The <code>await</code> keyword does not block the whole program. It only pauses this one function, so other work can continue while the network request is in flight.</p>
+  <h2>Handling errors with try and catch</h2>
+  <p>A rejected promise turns into a thrown error at the <code>await</code> point. That means ordinary <code>try</code> and <code>catch</code> blocks handle asynchronous failures, which keeps error handling in one place instead of scattered through callbacks.</p>
+  <pre><code>async function showUser(id) {
+  try {
+    const user = await loadUser(id);
+    render(user);
+  } catch (error) {
+    console.error("Could not load the user:", error);
+    showMessage("Something went wrong. Please try again.");
+  }
+}</code></pre>
+  <h2>Running tasks in parallel with Promise.all</h2>
+  <p>Awaiting one promise after another makes independent tasks run one at a time. When the tasks do not depend on each other, start them together and await them as a group with <code>Promise.all</code>, which resolves when every promise resolves.</p>
+  <pre><code>const [profile, orders] = await Promise.all([
+  loadUser(id),
+  loadOrders(id),
+]);
+
+renderDashboard(profile, orders);</code></pre>
+  <p>If any promise in the group rejects, the whole call rejects, so wrap it in the same <code>try</code> and <code>catch</code> pattern you already use.</p>
+  <h2>Common mistakes to avoid</h2>
+  <p>Forgetting <code>await</code> is the most frequent slip. Without it you keep the promise object instead of the value, so logging it shows <code>Promise { &lt;pending&gt; }</code> and later code runs before the data exists.</p>
+  <p>Another trap is awaiting inside a loop over independent tasks, which quietly makes them sequential. Collect the promises first and await them together when order does not matter. If order does matter, a plain <code>for</code> loop with <code>await</code> is a deliberate and readable choice.</p>
+  <p>Finally, remember that <code>await</code> only works inside an <code>async</code> function or at the top level of a module. Keeping functions small and awaited exactly once makes asynchronous code as easy to follow as the synchronous kind.</p>
+  <p><a class="button" href="/blogs/">Back to all blogs</a></p>
+</main><footer><a href="/">Sahil Jangra · KRYZO</a></footer></body>
+</html>
